@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
+body,
+html {
+	margin: 0;
+	padding: 0;
+	background-color: #171717;
+	font-family: "Patrick Hand", cursive;
+}
+.container {
+	padding: 1rem;
+	color: #ededed;
+}
+.navbar {
+	display: flex;
+	justify-content: center;
+}
+.navbar h3 {
+	font-size: 2rem;
+}
+.parentCard {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.card {
+	flex: 0 1 21%;
+	margin: 5px;
+	padding: 1rem;
+	border-radius: 4px;
+	background-color: #ededed;
+}
+.cardText {
+	color: #171717;
+	width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.cardTextDescription {
+	color: #171717;
+}
+.buttonLoadMore {
+	color: #171717;
+	background-color: #ededed;
+	padding: 1rem;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.4s;
+}
+.buttonLoadMore:hover {
+	margin-top: 4px;
+}
+.OptionLanguage {
+	background: transparent;
+	color: #ededed;
+	border: none;
+	margin-top: 5px;
+	font-size: 1.5rem;
+	font-family: "Patrick Hand", cursive;
+}
+.OptionLanguage option {
+	background: #171717;
+	border: none;
+}
+.OptionParent {
+	display: flex;
+	justify-content: center;
+}
+.createdBy {
+	font-size: 1rem;
+	text-align: center;
+}
+.createdBy a {
+	text-decoration: none;
+	color: #ededed;
+	font-weight: 600;
+}

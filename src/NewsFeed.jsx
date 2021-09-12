@@ -14,6 +14,7 @@ export default function NewsFeed() {
 	const [page, setPage] = useState(1);
 	const [isLoading, setLoading] = useState(false);
 	const [isError, setError] = useState(false);
+	const [country, setCountry] = useState("us");
 
 	// Proses API
 	useEffect(() => {
@@ -21,7 +22,7 @@ export default function NewsFeed() {
 			setLoading(true);
 			try {
 				const response = await fetch(
-					`${endpoint_api}id&apiKey=${process.env.REACT_APP_API_KEY}&page=${page}`
+					`${endpoint_api}${country}&apiKey=${process.env.REACT_APP_API_KEY}&page=${page}`
 				);
 				const results = await response.json();
 				setNews((currentState) => {
@@ -39,7 +40,13 @@ export default function NewsFeed() {
 		};
 
 		getNewsFeed();
-	}, [page]);
+	}, [page, country]);
+
+	const handlerChangeCountry = (e) => {
+		setCountry(e.target.value);
+		setNews(dataNews);
+		setLoading(false);
+	};
 
 	return (
 		<>
@@ -48,11 +55,16 @@ export default function NewsFeed() {
 					<a href="https://github.com/riyaraa">@riyaraa</a>
 				</p>
 				<div className={NewsFeedModule.navbar}>
-					<h3>NewsFeed - Indonesia</h3>
+					<h3>NewsFeed - {country === "us" ? "English" : "Indonesia"}</h3>
 				</div>
 				<div className={NewsFeedModule.OptionParent}>
-					<select className={NewsFeedModule.OptionLanguage}>
-						<option hidden>Indonesia</option>
+					<select
+						className={NewsFeedModule.OptionLanguage}
+						onChange={handlerChangeCountry}
+					>
+						<option hidden>{country === "us" && "English"}</option>
+						<option value="us">English</option>
+						<option value="id">Indonesia</option>
 					</select>
 				</div>
 			</header>
@@ -65,7 +77,9 @@ export default function NewsFeed() {
 					<div className={NewsFeedModule.container}>
 						<div className={NewsFeedModule.parentCard}>
 							<CardFeed articles={news} />
-							{news.articles.length < parseInt(news.totalResults) ? (
+						</div>
+						{news.articles.length < parseInt(news.totalResults) ? (
+							<div style={{ display: "flex", justifyContent: "center" }}>
 								<button
 									onClick={() => setPage((c) => c + 1)}
 									disabled={isLoading}
@@ -73,8 +87,8 @@ export default function NewsFeed() {
 								>
 									{isLoading ? "Loading..." : "Load More"}
 								</button>
-							) : null}
-						</div>
+							</div>
+						) : null}
 					</div>
 				</section>
 			)}

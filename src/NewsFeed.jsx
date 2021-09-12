@@ -25,6 +25,7 @@ export default function NewsFeed() {
 					`${endpoint_api}${country}&apiKey=${process.env.REACT_APP_API_KEY}&page=${page}`
 				);
 				const results = await response.json();
+
 				setNews((currentState) => {
 					return {
 						...results,
